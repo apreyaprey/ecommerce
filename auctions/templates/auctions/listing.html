@@ -1,0 +1,67 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<form class="" method="post">
+    {% csrf_token %}
+    <div class="col-6">
+        <h2>Listing: {{data.title}}</h2>
+        <span class="badge badge-dark">{{listing_tag}}</span>
+        <p class="card-text">{{data.description}}</p>
+        <hr />
+        <div class="m-4">
+            <img src="{{ data.image_url }}" class="card-img-top" alt="{{ data.title }} photo">
+        </div>
+        <hr />
+        <h4>$ {{data.price}}</h4>
+    </div>
+
+    {% if user.is_authenticated %}
+    <div class="col-6 form-group">
+        {{form.as_p}}
+        <button type="submit" name="place_bid" class="btn btn-primary">Place Bid</button>
+    </div>
+</form>
+<form class="" method="post">
+    {% csrf_token %}
+    <div class=" col-6 form-group">
+        <h5>Total bids: {{total_bids}}</h5>
+        <button type="submit" name="add_to_watchlist" class="btn btn-secondary">{{button_name}}</button>
+    </div>
+    {% endif %}
+</form>
+<hr />
+<form class="" method="post">
+    {% csrf_token %}
+    {% if user.is_authenticated %}
+
+    <div class="col form-group">
+        
+    <h4>Comments:</h4>
+        {% for comment in comments %}
+        <div class="card mb-2">
+            <div class="card-body">
+                <h5>{{comment.commentor}}</h5>
+                <p>{{comment.comment_desc}}</p>
+            </div>
+
+        </div>
+        {% endfor %}
+        {{comment_form.as_p}}
+        <button type="submit" name="add_comment" class="btn btn-secondary">Post comment</button>
+    </div>
+    {% endif %}
+
+</form>
+<form class="" method="post">
+    {% csrf_token %}
+    <div class="col form-group">
+        <p>Created by : {{data.created_by.username}}</p>
+        <p>{{winning_message}}</p>
+        {% if is_creator %}
+        <button type="submit" name="close_listing" class="btn btn-danger">Close</button>
+        {% endif %}
+    </div>
+</form>
+
+
+{% endblock %}

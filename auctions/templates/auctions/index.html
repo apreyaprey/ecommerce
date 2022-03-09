@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h2>Active Listings</h2>
+<div class="row d-flex align-items-stretch">
+    {% for listing in listings %}
+
+    <div class="col-3" >
+        <div class="card border-dark mb-3" >
+            
+            <img class="card-img-top" src="{{listing.image_url}}" >
+                        
+            <div class="card-body">
+                <h4 class="card-title">{{listing.title}}</h4>
+                <p class="card-text">{{listing.description}} </p>
+                <p class="card-text">$ {{listing.price}}</p>
+                <a href=/auctions/{{listing.id}} class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+
+
+    {% endfor %}
+</div>
+
+{% endblock %}

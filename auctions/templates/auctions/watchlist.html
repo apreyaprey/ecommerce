@@ -1,0 +1,19 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{% for listing in listings %}
+
+    <div class="col-3">
+        <div class="card border-0 mb-3">
+            <h4 class="card-header">{{listing.watchlist.title}}</h4>
+                <div class="card-body">
+                <p>{{listing.watchlist.description}} </p>
+                <p>$ {{listing.watchlist.price}}</p>
+                <a href=/auctions/{{listing.watchlist.id}} class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+
+
+    {% endfor %}
+{% endblock %}
