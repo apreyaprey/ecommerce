@@ -56,7 +56,9 @@
     {% csrf_token %}
     <div class="col form-group">
         <p>Created by : {{data.created_by.username}}</p>
+        {% if user.is_authenticated %}
         <p>{{winning_message}}</p>
+        {% endif %}
         {% if is_creator %}
         <button type="submit" name="close_listing" class="btn btn-danger">Close</button>
         {% endif %}
